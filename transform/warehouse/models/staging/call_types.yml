@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: call_types
+    description: different call types the dispatcher adds to the call
+    columns:
+      - name: call_types_code
+        description: the identifier of a call type
+        tests:
+          - not_null
+          - unique
+      - name: call_types_key
+        description: a unique key per each call_type
+        tests:
+          - not_null
+          - unique
+      - name: call_types_description
+        description: the description of the call type
+        tests:
+          - not_null
+      
+
