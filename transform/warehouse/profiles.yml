@@ -1,0 +1,32 @@
+warehouse:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: fd41266.us-east-2.aws
+
+      # User/password auth
+      user: '{{ env_var("SNOWFLAKE_USERNAME") }}'
+      password: '{{ env_var("SNOWFLAKE_PASSWORD") }}'
+
+      role: accountadmin
+      database: 'warehouse_{{ env_var("WAREHOUSE_USER") }}'
+      warehouse: xsmall_wh
+      schema: raw
+      threads: 12
+      client_session_keep_alive: False
+
+    prod:
+      type: snowflake
+      account: fd41266.us-east-2.aws
+
+      # User/password auth
+      user: '{{ env_var("SNOWFLAKE_USERNAME") }}'
+      password: '{{ env_var("SNOWFLAKE_PASSWORD") }}'
+
+      role: accountadmin
+      database: warehouse
+      warehouse: xsmall_wh
+      schema: raw
+      threads: 12
+      client_session_keep_alive: False

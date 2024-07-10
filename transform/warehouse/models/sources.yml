@@ -1,0 +1,10 @@
+version:
+
+sources:
+  - name: dispatch
+    schema: raw
+    tables:
+      - name: calls
+      - name: call_types
+      - name: supervisor_districts_current
+      - name: analysis_neighborhoods

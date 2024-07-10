@@ -1,0 +1,20 @@
+﻿Code,Definition,Explanation
+ABA,Abated,Officer responded confirmed the call and handled
+ADM,Admonished,Officer responded confirmed the call and handled
+ADV,Advised,Officer responded confirmed the call and handled
+ARR,Arrest,Officer indicates an arrest. Note: Will be different from other SFPD reporting and is should not be used to calculate arrest statistics
+CAN,Cancel,Call cancelled before officers engaged the call
+CSA,CPSA assignment,CPSA assignment
+22,Cancel,Call cancelled before officers engaged the call
+CIT,Cited,Citation was issued
+CRM,Criminal Activation,Burglary Alarm calls resulting in criminal activity
+GOA,Gone on Arrival,Upon arriving suspect no longer on scene.
+HAN,Handled,Officer responded confirmed the call and handled
+NCR,Non-Criminal,Arrived on scene and did not find a criminal issue
+ND,No Disposition,Officer determined this call related to another call. The other call would have the disposition for the incident.
+NOM,No Merit,Arrive on scene and Officer determines doesn’t merit further response
+PAS,Premises Appears Secure,Premises Appears Secure. Disposition commonly seen for house alarm calls.
+REP,Report,Officer resolved incident and this resulted in a police report. Note: Should not be used to calculate official number of reports
+SFD,SFFD Medical Staff Engaged,EMS or SFFD Medical Staff Engaged
+UTL,Unable to Locate,Upon arriving suspect no longer on scene
+VAS,Vehicle Appears Secure,Vehicle Appears Secure.

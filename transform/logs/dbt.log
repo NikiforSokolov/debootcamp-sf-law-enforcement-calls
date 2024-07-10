@@ -1,0 +1,46 @@
+[0m17:57:39.116585 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000149C54AAC10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000149C5B389A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000149C820F400>]}
+
+
+============================== 17:57:39.122247 | 771983d0-2ad1-4716-9be2-448efde68143 ==============================
+[0m17:57:39.122247 [info ] [MainThread]: Running with dbt=1.7.0
+[0m17:57:39.123314 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'profiles_dir': 'C:\\Users\\danielp\\.dbt', 'log_path': 'logs', 'debug': 'False', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'static_parser': 'True', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'invocation_command': 'dbt init', 'send_anonymous_usage_stats': 'True'}
+[0m17:57:53.478915 [debug] [MainThread]: Starter project path: C:\Users\danielp\Anaconda3\envs\py-etl\lib\site-packages\dbt\include\starter_project
+[0m17:57:53.510921 [info ] [MainThread]: 
+Your new dbt project "warehouse" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m17:57:53.514918 [info ] [MainThread]: Setting up your profile.
+[0m17:58:09.320098 [error] [MainThread]: Encountered an error:
+
+[0m17:58:09.326098 [error] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\danielp\Anaconda3\envs\py-etl\lib\site-packages\dbt\cli\requires.py", line 90, in wrapper
+    result, success = func(*args, **kwargs)
+  File "C:\Users\danielp\Anaconda3\envs\py-etl\lib\site-packages\dbt\cli\requires.py", line 75, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\danielp\Anaconda3\envs\py-etl\lib\site-packages\dbt\cli\main.py", line 515, in init
+    results = task.run()
+  File "C:\Users\danielp\Anaconda3\envs\py-etl\lib\site-packages\dbt\task\init.py", line 344, in run
+    self.setup_profile(profile_name)
+  File "C:\Users\danielp\Anaconda3\envs\py-etl\lib\site-packages\dbt\task\init.py", line 250, in setup_profile
+    if not self.check_if_can_write_profile(profile_name=profile_name):
+  File "C:\Users\danielp\Anaconda3\envs\py-etl\lib\site-packages\dbt\task\init.py", line 213, in check_if_can_write_profile
+    response = click.confirm(
+  File "C:\Users\danielp\Anaconda3\envs\py-etl\lib\site-packages\click\termui.py", line 235, in confirm
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m17:58:09.330098 [debug] [MainThread]: Command `dbt init` failed at 17:58:09.330098 after 30.31 seconds
+[0m17:58:09.331098 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000149C54AAC10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000149C8245580>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000149C8245DC0>]}
+[0m17:58:09.333101 [debug] [MainThread]: Flushing usage events
