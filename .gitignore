@@ -1,0 +1,8 @@
+# Ignore __pycache__ directories and logs
+**/__pycache__/
+**/logs/
+
+# Ignore env files (secrets)
+.env
+
+
