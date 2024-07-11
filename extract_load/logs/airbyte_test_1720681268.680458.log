@@ -1,0 +1,5 @@
+2024-07-11 10:01:08,681 - airbyte_test - INFO - Starting Airbyte test
+2024-07-11 10:01:08,681 - airbyte_test - INFO - Loading Environment Variables
+2024-07-11 10:01:08,685 - airbyte_test - INFO - Validating Airbyte connection
+2024-07-11 10:01:08,981 - airbyte_test - INFO - Airbyte Running Extract and Load
+2024-07-11 10:01:54,531 - airbyte_test - INFO - Airbyte Extract and Load Complete

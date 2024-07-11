@@ -13,13 +13,9 @@ if __name__ == "__main__":
     pipeline_logging.logger.info("Loading Environment Variables")   
     load_dotenv(override=True)
     AIRBYTE_USERNAME = os.environ.get("AIRBYTE_USERNAME")
-    print(AIRBYTE_USERNAME)
     AIRBYTE_PASSWORD = os.environ.get("AIRBYTE_PASSWORD")
-    print(AIRBYTE_PASSWORD)
     AIRBYTE_SERVER_NAME = os.environ.get("AIRBYTE_SERVER_NAME")
-    print(AIRBYTE_SERVER_NAME)
     AIRBYTE_CONNECTION_ID = os.environ.get("AIRBYTE_CONNECTION_ID")
-    print(AIRBYTE_CONNECTION_ID)
 
     pipeline_logging.logger.info("Validating Airbyte connection")
     airbyte_client = AirbyteClient(
