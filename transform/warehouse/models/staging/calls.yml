@@ -9,4 +9,3 @@ models:
       tests:
         - not_null
         - unique
-        
