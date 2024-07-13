@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: supervisor_districts
+    description: data includes the name and district code for each supervisor district
+    columns:
+      - name: SUPERVISOR_DISTRICTS_SUP_NAME
+        description: name of the supervisor district
+        tests:
+          - not_null
+      - name: SUPERVISOR_DISTRICTS_ID
+        tests:
+          - not_null

@@ -1,16 +1,15 @@
 
-
 select 
 {{ dbt_utils.generate_surrogate_key(['calls.cad_number']) }} as call_key,
 cad_number,
 cad_event_id,
 call_received_date as call_date,
 agency,
-{{ dbt_utils.generate_surrogate_key(['calls.call_type_code']) }} as call_types_key,
-call_priority,
+dim_call_types.call_types_key as call_types_key,
+calls.call_priority,
+calls.call_type_desc,
+calls.call_type_notes,
 {{ dbt_utils.generate_surrogate_key(['calls.call_disposition']) }} as call_disposition_key,
-call_type_desc,
-call_type_notes,
 {{ dbt_utils.generate_surrogate_key(['calls.neighborhood_name']) }} as neighborhood_key,
 dim_supervisor_districts.supervisor_districts_key,
 event_initiated_by,
@@ -40,5 +39,7 @@ left join {{ref('dim_supervisor_districts_prod')}} as dim_supervisor_districts
 on calls.supervisor_district_id = dim_supervisor_districts.supervisor_districts_id
 and calls.call_received_datetime::timestamp >=dim_supervisor_districts.dbt_valid_from
 and calls.call_received_datetime::timestamp < coalesce(dim_supervisor_districts.dbt_valid_to, '9999-01-01'::timestamp)
+left join {{ref('dim_call_types')}} as dim_call_types
+    on dim_call_types.call_types_code = calls.call_type_code
 
 

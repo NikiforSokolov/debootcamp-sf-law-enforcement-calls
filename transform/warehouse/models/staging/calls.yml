@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: calls
+    description:  law enforcement dispatched calls for service from San Franisco open data API
+    columns:
+    - name: cad_number
+      description: The calls identifier
+      tests:
+        - not_null
+        - unique
+        

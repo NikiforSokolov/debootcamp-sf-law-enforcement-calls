@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: neighborhood_economy
+    description: data includes various demographic and financial data about San Francisco Neighborhoods
+    columns:
+      - name: NEIGHBORHOOD_NAME
+        description: name of the neighborhood, sometimes the row includes couple of neighborhoods combined
+        tests:
+          - not_null
+          - unique
+      - name: NEIGHBORHOOD_HOUSEHOLDS_COUNT
+        description: number of households in the neighborhood
+      - name: NEIGHBORHOOD_PCT_IN_POVERTY
+        description: percentage of households in the neighborhood that are in poverty
+      - name: PERCENT_IN_POVERTY_CATEGORY
+        description: category of poverty, based on the percentage of households in the neighborhood that are in poverty
+        tests:
+          - accepted_values:
+              values: ['0%-10%',
+                       '10%-20%',
+                       '20%-30%',
+                       '30%-40%',
+                       '>40%']
