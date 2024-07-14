@@ -9,3 +9,11 @@ models:
       tests:
         - not_null
         - unique
+        - dbt_expectations.expect_column_value_lengths_to_equal:
+            value: 9
+    - name: call_priority
+      description: The priority of the call
+      tests:
+        - dbt_expectations.expect_column_most_common_value_to_be_in_set:
+            value_set: ['B', 'C']
+            top_n: 2
