@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized = "incremental",
+        unique_key = "cad_number",
+        incremental_strategy = "merge"
+    )
+}}
+
 select
     {{ dbt_utils.star(
         from=ref('fact_calls'), 
