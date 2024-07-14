@@ -1,3 +1,10 @@
+{{
+    config(
+        materialized = "incremental",
+        unique_key = "cad_number",
+        incremental_strategy = "merge"
+    )
+}}
 
 select 
 {{ dbt_utils.generate_surrogate_key(['calls.cad_number']) }} as call_key,
@@ -42,4 +49,7 @@ and calls.call_received_datetime::timestamp < coalesce(dim_supervisor_districts.
 left join {{ref('dim_call_types')}} as dim_call_types
     on dim_call_types.call_types_code = calls.call_type_code
 
+{% if is_incremental() %}
+    where call_data_updated_at >= (select max(call_data_updated_at) from {{this}})
+{% endif %}
 

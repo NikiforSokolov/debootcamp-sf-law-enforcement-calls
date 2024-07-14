@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized = "incremental",
+        unique_key = "cad_number",
+        incremental_strategy = "merge"
+    )
+}}
+
 with calls_clean as (
 select 
 cad_number,
@@ -43,6 +51,10 @@ case when sensitive_call = TRUE then 1
 end as is_sensitive_call,
 data_updated_at  as call_data_updated_at
 from {{source('dispatch','calls')}}
+{% if is_incremental() %}
+    where data_updated_at >= (select max(call_data_updated_at) from {{this}})
+{% endif %}
+
 
 )
 
