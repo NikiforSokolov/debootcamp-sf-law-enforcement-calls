@@ -10,19 +10,56 @@ This document provides an overview of the ELT project that utilizes Airbyte to e
 
 The goal was to answer the following business questions:
 
-- What 
-- What 
-- What 
-- Which 
+- Which call type is most commonly dispatched?
+- How the respond time changes with respect to various attributes such as:
+    -  Call type priority
+    -  Day of the week
+    -  Supervisor districts
+    -  Neighborhoods
+- Does higher priority call types have a shorter response time?
+- Which police district has the slowest response time
 
+### Our data set overview
+
+<h3>Data Source</h3>
+The dataset comprises law enforcement dispatched calls for service, covering emergency and non-emergency calls managed by the San Francisco Department of Emergency Management's 9-1-1 Call Center and Computer-Aided Dispatch (CAD) System.
+
+<h3>Main Measures and Features</h3>
+
+- Incident Number: Unique identifier for each call.
+- Call Date and Time: Timestamp of when the call was received and dispatched.
+- Incident Location: Latitude, longitude, and address of the incident.
+- Call Type: Categorization of the incident (e.g., burglary, traffic stop, domestic violence).
+- Priority Level: Indicates the urgency of the call.
+- Response Time: Duration between call receipt and dispatch/arrival of law enforcement.
+- Outcome/Disposition: Result or status of the call (e.g., report taken, arrest made, unfounded).
+- Reporting District: Specific district or jurisdiction handling the call.
+
+<h3>Service Time Analysis</h3>
+
+[<img src="docs/images/911_stages.png" width="600px">]
+
+The dataset allows for detailed analysis of response times and other time intervals involved in handling 9-1-1 calls:
+
+- Intake Time: Time from when a call is received to when it is entered into the queue (received_datetime to entry_datetime).
+- Queue Time: Time from when a call is entered into the queue to when it is dispatched (entry_datetime to dispatch_datetime).
+- Travel Time: Time from when a call is dispatched to when the first unit arrives on the scene (dispatch_datetime to onscene_datetime).
+- Call Duration: Time from when the first unit arrives on the scene to when the last unit closes the call (onscene_datetime to closed_datetime).
+
+<b>SFPD Response Time</b>: Combines Queue and Travel Time, representing the time from when the call is entered into the queue to when the first unit arrives on the scene.
+
+<b>Response Time</b>: Total time from when the call is received to when the first unit arrives on the scene, reflecting the wait time experienced by the citizen.
+
+This detailed breakdown helps in understanding and improving the efficiency and effectiveness of law enforcement response to incidents.
+
+<a href="https://sfdigitalservices.gitbook.io/dataset-explainers/law-enforcement-dispatched-calls-for-service"> overview of the dataset </a>
 ## Project Components
 
-image of the project diagram here
+[image of the project diagram here]
 
 ### 1. Source Database: DataSF
 
 The source database is an API containing vast amounts of information about the city of San Francisco. We have chosen this dataset to practice cleaning real life data.
-
 
 
 ### 2. Destination Data Warehouse: Snowflake (OLAP)
@@ -43,9 +80,9 @@ In our specific case, these schemas include Staging, Marts, and Reports. Thus, o
 
 The orchestrator responsible for running the workflow and calling each step in the correct order is a bash file. While there are more robust and specific tools for orchestrating data pipelines, this project focuses on understanding each step more deeply without having to worry about the orchestration part.
 
-### 6. BI Tool: [name of the bi tool we've chosen]
+### 6. BI Tool: Power BI
 
-\[name of the tool\] is the BI tool we chose to create visualizations and analysis of our transformed data.
+Power BI is the BI tool we chose to create visualizations and analysis of our transformed data. We did it mostly because we are proficient with this tool.
 
 ## Project Workflow
 
@@ -53,7 +90,10 @@ The orchestrator responsible for running the workflow and calling each step in t
 
 2. **Loading (L)**: Airbyte loads the extracted data into Snowflake using the appropriate Snowflake connector. The data is loaded into a `raw` schema.
 
-3. **Transformation (T)**: Transformation tasks, if necessary, can be performed with downstream processes such as DBT running against Snowflake. These tasks are responsible for creating the `staging`, `marts`, and `reports` schemas.
+3. **Transformation (T)**: Transformation tasks, if necessary, can be performed with downstream processes such as DBT running against Snowflake. These tasks are responsible for creating the `staging`, `marts` schemas.
+
+## Project Architecture
+
 
 ## Implementation Steps
 
@@ -107,18 +147,58 @@ The orchestrator responsible for running the workflow and calling each step in t
 ## Functionality Screenshots
 
 Here are some screenshots that demonstrate the functionality working inside Airbyte:
+building custom api connector:
+
+<img src="docs/images/airbyte_custom_builder.png"/>
+
+<img src="docs/images/airbyte_load.png"/>
+
+SCD testing:
+before insert:
+<img src="docs/images/scd_1_before_insert.png"/>
+after insert:
+<img src="docs/images/scd_2_new_record_insert.png"/>
+<img src="docs/images/scd_3_after_insert.png"/>
 
 
 
-## ER Diagrams
-
+## ERD Diagrams
+<img src="docs/images/model_ERD_power_bi.png"/>
 
 ## Conclusion
 
 As stated earlier, our goal was to answer the following questions:
 
+- Which call type is most commonly dispatched?
+- How the respond time changes with respect to various attributes such as:
+    -  Call type priority
+    -  Day of the week
+    -  Supervisor districts
+    -  Neighborhoods
+- Does higher priority call types have a shorter response time?
+- Which police district has the slowest response time
 
 We used  to visualize these findings:
+
+<b><u>response time by police districts and neighborhoods:</u></b>
+<img src="docs/images/power_bi_1_police_districts.png"/>
+
+<b><u>response time by call type:</u></b>
+<img src="docs/images/power_bi_2_call_types.png"/>
+
+<b><u>call count by month:</u></b>
+<img src="docs/images/power_bi_3_calls_by_month.png"/>
+
+<b><u>responce time by neighborhoods:</u></b>
+<img src="docs/images/power_bi_4_neighborhoods.png"/>
+
+<b><u>call count by day of the week:</u></b>
+<img src="docs/images/power_bi_5_calls_week_day.png"/>
+
+<b><u>Explore the dashboard online:</u></b>
+
+[<img src="docs/images/powerbi_icon.png" width="500px">](https://app.powerbi.com/view?r=eyJrIjoiMjMyOTlhZTYtOTJiYy00MjVjLTg2ZGItYmQ3MWIxZTliOGQ2IiwidCI6IjcxYzViZWNkLWVkMWEtNDBiNy05NjdkLWE1NmQwZDYzY2QyNiIsImMiOjl9)
+
 
 
 

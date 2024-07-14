@@ -12,3 +12,31 @@ Runtime Error
 [0m14:54:03.065678 [debug] [MainThread]: Command `dbt run` failed at 14:54:03.065678 after 0.11 seconds
 [0m14:54:03.066709 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A685077BE0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A687DF1FD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A687DE0700>]}
 [0m14:54:03.067227 [debug] [MainThread]: Flushing usage events
+[0m13:56:54.556504 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014A810C70D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014A83F71BB0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014A818B40D0>]}
+
+
+============================== 13:56:54.560854 | 0b0daef5-ae12-47bc-bec0-dbd1008c2c73 ==============================
+[0m13:56:54.560854 [info ] [MainThread]: Running with dbt=1.7.0
+[0m13:56:54.561845 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'C:\\Users\\danielp\\.dbt', 'debug': 'False', 'warn_error': 'None', 'log_path': 'logs', 'version_check': 'True', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'invocation_command': 'dbt build --target prod', 'log_format': 'default', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m13:56:54.563843 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Users\danielp\debootcamp-sf-law-enforcement-calls\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m13:56:54.567844 [debug] [MainThread]: Command `dbt build` failed at 13:56:54.566844 after 0.12 seconds
+[0m13:56:54.568845 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014A810C70D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014A818B40D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014A83F86B80>]}
+[0m13:56:54.569846 [debug] [MainThread]: Flushing usage events
+[0m15:37:32.817173 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000287D4E28340>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000287D7BA6F40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000287D7B92160>]}
+
+
+============================== 15:37:32.820173 | f9d71597-ed0f-43ab-9a18-ac62bf6d42a8 ==============================
+[0m15:37:32.820173 [info ] [MainThread]: Running with dbt=1.7.0
+[0m15:37:32.821174 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'profiles_dir': 'C:\\Users\\danielp\\.dbt', 'log_path': 'logs', 'debug': 'False', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt snapshot -s dim_supervisor_districts', 'introspect': 'True', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True'}
+[0m15:37:32.822173 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Users\danielp\debootcamp-sf-law-enforcement-calls\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m15:37:32.825203 [debug] [MainThread]: Command `dbt snapshot` failed at 15:37:32.824173 after 0.09 seconds
+[0m15:37:32.825203 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000287D4E28340>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000287D7B60A60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000287D7B92520>]}
+[0m15:37:32.826203 [debug] [MainThread]: Flushing usage events
