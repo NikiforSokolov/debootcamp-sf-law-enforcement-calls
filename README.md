@@ -26,25 +26,25 @@ The dataset comprises law enforcement dispatched calls for service, covering eme
 
 <h3>Main Measures and Features</h3>
 
-- Incident Number: Unique identifier for each call.
-- Call Date and Time: Timestamp of when the call was received and dispatched.
-- Incident Location: Latitude, longitude, and address of the incident.
-- Call Type: Categorization of the incident (e.g., burglary, traffic stop, domestic violence).
-- Priority Level: Indicates the urgency of the call.
-- Response Time: Duration between call receipt and dispatch/arrival of law enforcement.
-- Outcome/Disposition: Result or status of the call (e.g., report taken, arrest made, unfounded).
-- Reporting District: Specific district or jurisdiction handling the call.
+- **Incident Number**: Unique identifier for each call.
+- **Call Date and Time**: Timestamp of when the call was received and dispatched.
+- **Incident Location**: Latitude, longitude, and address of the incident.
+- **Call Type**: Categorization of the incident (e.g., burglary, traffic stop, domestic violence).
+- **Priority Level**: Indicates the urgency of the call.
+- **Response Time**: Duration between call receipt and dispatch/arrival of law enforcement.
+- **Outcome/Disposition**: Result or status of the call (e.g., report taken, arrest made, unfounded).
+- **Reporting District**: Specific district or jurisdiction handling the call.
 
 <h3>Service Time Analysis</h3>
 
-[<img src="docs/images/911_stages.png" width="600px">]
+<img src="docs/images/911_stages.png" width="670px">
 
 The dataset allows for detailed analysis of response times and other time intervals involved in handling 9-1-1 calls:
 
-- Intake Time: Time from when a call is received to when it is entered into the queue (received_datetime to entry_datetime).
-- Queue Time: Time from when a call is entered into the queue to when it is dispatched (entry_datetime to dispatch_datetime).
-- Travel Time: Time from when a call is dispatched to when the first unit arrives on the scene (dispatch_datetime to onscene_datetime).
-- Call Duration: Time from when the first unit arrives on the scene to when the last unit closes the call (onscene_datetime to closed_datetime).
+- **Intake Time**: Time from when a call is received to when it is entered into the queue (received_datetime to entry_datetime).
+- **Queue Time**: Time from when a call is entered into the queue to when it is dispatched (entry_datetime to dispatch_datetime).
+- **Travel Time**: Time from when a call is dispatched to when the first unit arrives on the scene (dispatch_datetime to onscene_datetime).
+- **Call Duration**: Time from when the first unit arrives on the scene to when the last unit closes the call (onscene_datetime to closed_datetime).
 
 <b>SFPD Response Time</b>: Combines Queue and Travel Time, representing the time from when the call is entered into the queue to when the first unit arrives on the scene.
 
@@ -53,14 +53,15 @@ The dataset allows for detailed analysis of response times and other time interv
 This detailed breakdown helps in understanding and improving the efficiency and effectiveness of law enforcement response to incidents.
 
 <a href="https://sfdigitalservices.gitbook.io/dataset-explainers/law-enforcement-dispatched-calls-for-service"> overview of the dataset </a>
-## Project Components
+## Project Architecture & Components
 
-[image of the project diagram here]
+Below is a diagram illustrating the architecture of the project and its components:
+
+<img src="docs/images/project_architecture.png" width="1400px">
 
 ### 1. Source Database: DataSF
 
 The source database is an API containing vast amounts of information about the city of San Francisco. We have chosen this dataset to practice cleaning real life data.
-
 
 ### 2. Destination Data Warehouse: Snowflake (OLAP)
 
@@ -91,9 +92,6 @@ Power BI is the BI tool we chose to create visualizations and analysis of our tr
 2. **Loading (L)**: Airbyte loads the extracted data into Snowflake using the appropriate Snowflake connector. The data is loaded into a `raw` schema.
 
 3. **Transformation (T)**: Transformation tasks, if necessary, can be performed with downstream processes such as DBT running against Snowflake. These tasks are responsible for creating the `staging`, `marts` schemas.
-
-## Project Architecture
-
 
 ## Implementation Steps
 
