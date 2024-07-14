@@ -50,3 +50,7 @@ left join {{ref('dim_call_disposition')}}           as dim_call_disposition
     on fact_calls.call_disposition_key = dim_call_disposition.call_disposition_key
 left join {{ref('dim_date')}}                       as dim_date 
     on fact_calls.call_date = dim_date.date_day
+
+{% if is_incremental() %}
+    where call_data_updated_at >= (select max(call_data_updated_at) from {{this}})
+{% endif %}
