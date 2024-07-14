@@ -1,0 +1,457 @@
+version: 0.89.0
+
+type: DeclarativeSource
+
+check:
+  type: CheckStream
+  stream_names:
+    - calls
+
+definitions:
+  streams:
+    calls:
+      type: DeclarativeStream
+      name: calls
+      retriever:
+        type: SimpleRetriever
+        paginator:
+          type: DefaultPaginator
+          page_size_option:
+            type: RequestOption
+            field_name: $limit
+            inject_into: request_parameter
+          page_token_option:
+            type: RequestOption
+            field_name: $offset
+            inject_into: request_parameter
+          pagination_strategy:
+            type: OffsetIncrement
+            page_size: 20000
+            inject_on_first_request: true
+        requester:
+          $ref: '#/definitions/base_requester'
+          path: /2zdj-bwza.json
+          http_method: GET
+          request_parameters:
+            $order: cad_number
+        record_selector:
+          type: RecordSelector
+          extractor:
+            type: DpathExtractor
+            field_path: []
+      schema_loader:
+        type: InlineSchemaLoader
+        schema:
+          $ref: '#/schemas/calls'
+      incremental_sync:
+        type: DatetimeBasedCursor
+        cursor_field: '{{ config[''record_cursor''] }}'
+        start_datetime:
+          type: MinMaxDatetime
+          datetime: '{{ config["start_date"] }}'
+          datetime_format: '%Y-%m-%dT%H:%M:%SZ'
+        datetime_format: data_updated_at>'%Y-%m-%dT%H:%M:%S'
+        start_time_option:
+          type: RequestOption
+          field_name: $where
+          inject_into: request_parameter
+        cursor_datetime_formats:
+          - '%Y-%m-%dT%H:%M:%S'
+          - '%Y-%m-%dT%H:%M:%S.000'
+          - '%Y-%m-%dT%H:%M:%S.%f'
+          - '%Y-%m-%dT%H:%M:%S.%fZ'
+    call_types:
+      type: DeclarativeStream
+      name: call_types
+      retriever:
+        type: SimpleRetriever
+        requester:
+          $ref: '#/definitions/base_requester'
+          path: /92ue-2pfu.json
+          http_method: GET
+        record_selector:
+          type: RecordSelector
+          extractor:
+            type: DpathExtractor
+            field_path: []
+      schema_loader:
+        type: InlineSchemaLoader
+        schema:
+          $ref: '#/schemas/call_types'
+    analysis_neighborhoods:
+      type: DeclarativeStream
+      name: analysis_neighborhoods
+      retriever:
+        type: SimpleRetriever
+        requester:
+          $ref: '#/definitions/base_requester'
+          path: j2bu-swwd.json
+          http_method: GET
+        record_selector:
+          type: RecordSelector
+          extractor:
+            type: DpathExtractor
+            field_path: []
+      schema_loader:
+        type: InlineSchemaLoader
+        schema:
+          $ref: '#/schemas/analysis_neighborhoods'
+    supervisor_districts_current:
+      type: DeclarativeStream
+      name: supervisor_districts_current
+      retriever:
+        type: SimpleRetriever
+        requester:
+          $ref: '#/definitions/base_requester'
+          path: cqbw-m5m3.json
+          http_method: GET
+        record_selector:
+          type: RecordSelector
+          extractor:
+            type: DpathExtractor
+            field_path: []
+      schema_loader:
+        type: InlineSchemaLoader
+        schema:
+          $ref: '#/schemas/supervisor_districts_current'
+      incremental_sync:
+        type: DatetimeBasedCursor
+        cursor_field: data_as_of
+        start_datetime:
+          type: MinMaxDatetime
+          datetime: '2022-01-01T00:00:00'
+          datetime_format: '%Y-%m-%dT%H:%M:%S'
+        datetime_format: data_as_of>'%Y-%m-%dT%H:%M:%S.%f'
+        start_time_option:
+          type: RequestOption
+          field_name: $where
+          inject_into: request_parameter
+        cursor_datetime_formats:
+          - '%Y-%m-%dT%H:%M:%S.%f'
+          - '%Y-%m-%dT%H:%M:%S.%fZ'
+  base_requester:
+    type: HttpRequester
+    url_base: https://data.sfgov.org/resource
+    authenticator:
+      type: ApiKeyAuthenticator
+      api_token: '{{ config["api_key"] }}'
+      inject_into:
+        type: RequestOption
+        field_name: X-App-Token
+        inject_into: header
+
+streams:
+  - $ref: '#/definitions/streams/calls'
+  - $ref: '#/definitions/streams/call_types'
+  - $ref: '#/definitions/streams/supervisor_districts_current'
+  - $ref: '#/definitions/streams/analysis_neighborhoods'
+
+spec:
+  type: Spec
+  connection_specification:
+    type: object
+    $schema: http://json-schema.org/draft-07/schema#
+    required:
+      - api_key
+      - start_date
+    properties:
+      api_key:
+        type: string
+        order: 0
+        title: API Key
+        airbyte_secret: true
+      start_date:
+        type: string
+        order: 2
+        title: Start date
+        format: date-time
+        pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$
+      record_cursor:
+        type: string
+        order: 1
+        title: record_cursor
+    additionalProperties: true
+
+metadata:
+  autoImportSchema:
+    calls: true
+    call_types: true
+    analysis_neighborhoods: true
+    supervisor_districts_current: true
+
+schemas:
+  calls:
+    type: object
+    $schema: http://json-schema.org/schema#
+    required:
+      - data_updated_at
+    properties:
+      agency:
+        type:
+          - string
+          - 'null'
+      cad_number:
+        type:
+          - string
+          - 'null'
+      disposition:
+        type:
+          - string
+          - 'null'
+      onview_flag:
+        type:
+          - string
+          - 'null'
+      close_datetime:
+        type:
+          - string
+          - 'null'
+      data_loaded_at:
+        type:
+          - string
+          - 'null'
+      dup_cad_number:
+        type:
+          - string
+          - 'null'
+      entry_datetime:
+        type:
+          - string
+          - 'null'
+      priority_final:
+        type:
+          - string
+          - 'null'
+      sensitive_call:
+        type:
+          - boolean
+          - 'null'
+      call_type_final:
+        type:
+          - string
+          - 'null'
+      data_updated_at:
+        type: string
+      intersection_id:
+        type:
+          - string
+          - 'null'
+      police_district:
+        type:
+          - string
+          - 'null'
+      source_filename:
+        type:
+          - string
+          - 'null'
+      enroute_datetime:
+        type:
+          - string
+          - 'null'
+      onscene_datetime:
+        type:
+          - string
+          - 'null'
+      dispatch_datetime:
+        type:
+          - string
+          - 'null'
+      intersection_name:
+        type:
+          - string
+          - 'null'
+      priority_original:
+        type:
+          - string
+          - 'null'
+      received_datetime:
+        type:
+          - string
+          - 'null'
+      call_type_original:
+        type:
+          - string
+          - 'null'
+      intersection_point:
+        type:
+          - object
+          - 'null'
+        properties:
+          type:
+            type:
+              - string
+              - 'null'
+          coordinates:
+            type:
+              - array
+              - 'null'
+            items:
+              type:
+                - number
+                - 'null'
+      pd_incident_report:
+        type:
+          - string
+          - 'null'
+      supervisor_district:
+        type:
+          - string
+          - 'null'
+      call_type_final_desc:
+        type:
+          - string
+          - 'null'
+      analysis_neighborhood:
+        type:
+          - string
+          - 'null'
+      call_type_final_notes:
+        type:
+          - string
+          - 'null'
+      call_type_original_desc:
+        type:
+          - string
+          - 'null'
+      call_type_original_notes:
+        type:
+          - string
+          - 'null'
+    additionalProperties: true
+  call_types:
+    type: object
+    $schema: http://json-schema.org/schema#
+    properties:
+      key:
+        type:
+          - string
+          - 'null'
+      alias:
+        type:
+          - string
+          - 'null'
+      advised:
+        type:
+          - string
+          - 'null'
+      priority:
+        type:
+          - string
+          - 'null'
+      call_type:
+        type:
+          - string
+          - 'null'
+      data_as_of:
+        type:
+          - string
+          - 'null'
+      description:
+        type:
+          - string
+          - 'null'
+      data_loaded_at:
+        type:
+          - string
+          - 'null'
+    additionalProperties: true
+  analysis_neighborhoods:
+    type: object
+    $schema: http://json-schema.org/schema#
+    properties:
+      nhood:
+        type:
+          - string
+          - 'null'
+      the_geom:
+        type:
+          - object
+          - 'null'
+        properties:
+          type:
+            type:
+              - string
+              - 'null'
+          coordinates:
+            type:
+              - array
+              - 'null'
+            items:
+              type:
+                - array
+                - 'null'
+              items:
+                type:
+                  - array
+                  - 'null'
+                items:
+                  type:
+                    - array
+                    - 'null'
+                  items:
+                    type:
+                      - number
+                      - 'null'
+    additionalProperties: true
+  supervisor_districts_current:
+    type: object
+    $schema: http://json-schema.org/schema#
+    required:
+      - data_as_of
+    properties:
+      sup_dist:
+        type:
+          - string
+          - 'null'
+      sup_name:
+        type:
+          - string
+          - 'null'
+      data_as_of:
+        type: string
+      multipolygon:
+        type:
+          - object
+          - 'null'
+        properties:
+          type:
+            type:
+              - string
+              - 'null'
+          coordinates:
+            type:
+              - array
+              - 'null'
+            items:
+              type:
+                - array
+                - 'null'
+              items:
+                type:
+                  - array
+                  - 'null'
+                items:
+                  type:
+                    - array
+                    - 'null'
+                  items:
+                    type:
+                      - number
+                      - 'null'
+      sup_dist_num:
+        type:
+          - string
+          - 'null'
+      sup_dist_pad:
+        type:
+          - string
+          - 'null'
+      sup_dist_name:
+        type:
+          - string
+          - 'null'
+      data_loaded_at:
+        type:
+          - string
+          - 'null'
+    additionalProperties: true

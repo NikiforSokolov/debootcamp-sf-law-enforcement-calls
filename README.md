@@ -180,22 +180,32 @@ As stated earlier, our goal was to answer the following questions:
 
 We used  to visualize these findings:
 
-<b><u>response time by police districts and neighborhoods:</u></b>
+<ins><b>response time by police districts and neighborhoods:</b></ins>
+<div style="border: 2px solid black;">
 <img src="docs/images/power_bi_1_police_districts.png"/>
+</div>
 
-<b><u>response time by call type:</u></b>
+<ins><b>response time by call type:</b></ins>
+<div style="border: 2px solid black;">
 <img src="docs/images/power_bi_2_call_types.png"/>
+</div>
 
-<b><u>call count by month:</u></b>
+<ins><b>call count by month:</b></ins>
+<div style="border: 2px solid black;">
 <img src="docs/images/power_bi_3_calls_by_month.png"/>
+</div>
 
-<b><u>responce time by neighborhoods:</u></b>
+<ins><b>responce time by neighborhoods:</b></ins>
+<div style="border: 2px solid black;">
 <img src="docs/images/power_bi_4_neighborhoods.png"/>
+</div>
 
-<b><u>call count by day of the week:</u></b>
+<ins><b>call count by day of the week:</b></ins>
+<div style="border: 2px solid black;">
 <img src="docs/images/power_bi_5_calls_week_day.png"/>
+</div>
 
-<b><u>Explore the dashboard online:</u></b>
+<ins><b>Explore the dashboard online:</b></ins>
 
 [<img src="docs/images/powerbi_icon.png" width="500px">](https://app.powerbi.com/view?r=eyJrIjoiMjMyOTlhZTYtOTJiYy00MjVjLTg2ZGItYmQ3MWIxZTliOGQ2IiwidCI6IjcxYzViZWNkLWVkMWEtNDBiNy05NjdkLWE1NmQwZDYzY2QyNiIsImMiOjl9)
 
