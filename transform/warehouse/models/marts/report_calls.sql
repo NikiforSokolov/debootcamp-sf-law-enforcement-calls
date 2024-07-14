@@ -1,4 +1,10 @@
-
+{{
+    config(
+        materialized = "incremental",
+        unique_key = "cad_number",
+        incremental_strategy = "merge"
+    )
+}}
 
 select
 {{ dbt_utils.star(from=ref('fact_calls'), relation_alias='fact_calls', except=[
@@ -15,3 +21,7 @@ left join {{ref('dim_call_types')}} as dim_call_types on fact_calls.call_types_k
 left join {{ref('dim_neighborhood')}} as dim_neighborhood on fact_calls.neighborhood_key = dim_neighborhood.neighborhood_key
 left join {{ref('dim_call_disposition')}} as dim_call_disposition on fact_calls.call_disposition_key = dim_call_disposition.call_disposition_key
 left join {{ref('dim_date')}} as dim_date on fact_calls.call_date = dim_date.date_day
+
+{% if is_incremental() %}
+    where call_data_updated_at >= (select max(call_data_updated_at) from {{this}})
+{% endif %}
